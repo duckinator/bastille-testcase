@@ -1,14 +1,7 @@
 #!/usr/bin/env bash
 
-function run() {
-	time bash -c "bastille create test$1-$2 12.1-RELEASE 10.1.$1.$2 && bastille start test$1-$2 && bastille cmd test$1-$2 sleep 300; bastille stop test$1-$2 && bastille destroy test$1-$2"
-}
-
-function batch() {
-	for ((i=1; i < 250; i++)); do
-		run $1 $i & sleep 0.1
+for ((round=0; round < 5; round++)); do
+	for ((i = 0; i < 100; i++)); do
+		bash -c "bastille create test$i 12.1-RELEASE 10.0.1.$i && bastille start test$i && bastille cmd test$i sleep 300; bastille stop test$i && bastille destroy test$i" &
 	done
-}
-
-batch 1
-batch 2
+done
