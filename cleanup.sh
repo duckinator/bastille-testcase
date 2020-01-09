@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ls /usr/local/bastille/jails 2>/dev/null || { echo "No remaining containers."; exit; }
+ls /usr/local/bastille/jails/* 2>/dev/null || { echo "No remaining containers."; exit; }
 
 for container in $(ls /usr/local/bastille/jails 2>/dev/null | cut -d '/' -f 6); do
 	bastille stop $container
@@ -11,7 +11,7 @@ echo
 echo
 echo
 
-ls /usr/local/bastille/jails 2>/dev/null || { echo "All containers removed."; exit; }
+ls /usr/local/bastille/jails/* 2>/dev/null || { echo "All containers removed."; exit; }
 
 echo "Containers that could not be stopped+destroyed properly:"
 
